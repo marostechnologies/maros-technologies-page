@@ -124,14 +124,12 @@ const AboutSection = () => {
                     title: 'Misión',
                     description:
                       'Desarrollar soluciones digitales personalizadas que impulsen a cada cliente a gestionar y optimizar su información de manera integral y eficiente.',
-                    size: 12, // más grande solo para Misión
                   },
                   {
                     icon: '/about/vision.png',
                     title: 'Visión',
                     description:
                       'Ser una empresa mexicana referente en innovación tecnológica, reconocida por ofrecer sitios web y sistemas a la medida que generen autonomía y valor sostenible.',
-                    size: 10, // más grande solo para Visión
                   },
                 ].map((item, idx) => (
                   <div
@@ -139,8 +137,9 @@ const AboutSection = () => {
                     className="item p-6 transition-all duration-300 bg-white rounded-2xl shadow-xl hover:scale-[1.04] hover:shadow-2xl"
                   >
                     <div className="flex items-center gap-3 mb-4">
-                      <div className={`p-2 bg-[#013467]/10 rounded-lg`}>
-                        <AboutIcon icon={item.icon} title={item.title} size={item.size} />
+                      {/* 🔹 Recuadros mismo tamaño */}
+                      <div className="w-12 h-12 flex items-center justify-center bg-[#013467]/10 rounded-lg">
+                        <AboutIcon icon={item.icon} title={item.title} size={10} />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
                     </div>

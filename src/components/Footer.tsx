@@ -21,9 +21,17 @@ const Footer = () => {
   ];
 
   const contactLinks = [
-    { name: 'marostechnologies@gmail.com', href: 'mailto:marostechnologies@gmail.com', icon: <Mail className="w-4 h-4" /> },
-    { name: 'marostechnologies', href: 'https://www.instagram.com/marostechnologies', icon: <Instagram className="w-4 h-4" /> },
-    { name: 'CDMX, México', href: '#', icon: <MapPin className="w-4 h-4" /> }
+    { 
+      name: 'marostechnology', 
+      href: 'https://www.instagram.com/marostechnology?igsh=bXljbTl0NTN5OWMx&utm_source=qr', 
+      icon: <Instagram className="w-4 h-4" /> 
+    },
+    { 
+      name: 'marostechnologies@gmail.com', 
+      href: 'mailto:marostechnologies@gmail.com', 
+      // Se ajustó el ícono de Mail para que tenga el mismo tamaño fijo que el de Instagram.
+      icon: <Mail className="w-4 h-4" /> 
+    }
   ];
 
   const scrollToSection = (href: string) => {
@@ -48,7 +56,7 @@ const Footer = () => {
           >
             <div className="flex items-center gap-2">
               <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
-              <span className="font-semibold text-gray-900 text-lg">Maros Technologies</span>
+              <span className="font-semibold text-gray-900 text-lg">MAROS Technology</span>
             </div>
             <p className="text-sm text-gray-500">
               Empresa mexicana fundada en 2025, especializada en soluciones digitales.
@@ -104,7 +112,7 @@ const Footer = () => {
             className="space-y-4"
           >
             <h3 className="font-semibold text-sm uppercase tracking-wider text-gray-900">Contacto</h3>
-            <div className="flex flex-col gap-2 text-sm text-gray-500">
+            <div className="flex flex-col gap-2 text-sm text-gray-500 items-start">
               {contactLinks.map((link, i) => (
                 <a
                   key={i}
@@ -123,7 +131,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 border-t border-gray-200 pt-6 text-center text-sm text-gray-400">
-          <p>© 2025 Maros Technologies. Todos los derechos reservados.</p>
+          <p>© 2025 Maros Technology. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

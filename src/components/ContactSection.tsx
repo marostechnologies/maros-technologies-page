@@ -35,7 +35,7 @@ const ContactSection = () => {
           transform: translate3d(0, 0, 0);
         }
       `}</style>
-      <section 
+      <section
         ref={ref}
         className={`py-24 bg-white section-transition-container ${isIntersecting ? 'is-visible' : ''}`}
         id="contact"
@@ -58,7 +58,7 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Cards */}
-          <div 
+          <div
             className={`grid grid-cols-2 gap-4 max-w-3xl mx-auto transition-opacity duration-1000 transform ${isIntersecting ? 'opacity-100' : 'opacity-0'}`}
           >
 
@@ -85,7 +85,7 @@ const ContactSection = () => {
 
             {/* Instagram Card */}
             <a
-              href="https://www.instagram.com/marostechnologies"
+              href="https://www.instagram.com/marostechnology?igsh=bXljbTl0NTN5OWMx&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative flex flex-col items-center text-center p-3 md:p-6 bg-gray-50 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-transparent hover:ring-4 hover:ring-[#013467]/20"
@@ -97,7 +97,7 @@ const ContactSection = () => {
                 <div className="space-y-1">
                   <h4 className="font-semibold text-xs sm:text-sm md:text-base text-gray-900">Instagram</h4>
                   <p className="text-gray-600 text-[10px] sm:text-xs md:text-sm font-medium group-hover:text-yellow-500 transition-colors text-center">
-                    @marostechnologies
+                    @marostechnology
                   </p>
                   <p className="text-[9px] sm:text-xs md:text-sm text-gray-400 text-center">
                     Síguenos en redes sociales

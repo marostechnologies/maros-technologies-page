@@ -67,13 +67,13 @@ const PricingSection = () => {
 
   const handleEmailClick = () => {
     const subject = `Solicitud de Cotización: ${selectedPlan}`;
-    const body = `Hola equipo de MAROS Technologies,\n\nMe gustaría solicitar una cotización para mi proyecto de ${selectedPlan}.\n\nEspero su respuesta, ¡gracias!`;
+    const body = `Hola equipo de MAROS Technology,\n\nMe gustaría solicitar una cotización para mi proyecto de ${selectedPlan}.\n\nEspero su respuesta, ¡gracias!`;
     window.location.href = `mailto:marostechnologies@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     handleCloseModal();
   };
 
   const handleInstagramClick = () => {
-    const instagramUrl = `https://ig.me/m/marostechnologies`;
+    const instagramUrl = "https://www.instagram.com/marostechnology?igsh=bXljbTl0NTN5OWMx&utm_source=qr";
     window.open(instagramUrl, "_blank");
     handleCloseModal();
   };
