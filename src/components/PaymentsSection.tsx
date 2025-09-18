@@ -22,12 +22,12 @@ const pricingData = [
     supportIncludes: ["Actualización de contenido", "Seguridad", "Mejoras menores", "Corrección de errores"]
   },
   {
-    type: "Web con Backend Funcional",
-    projectPrice: "$12,000 - $30,000",
-    monthlySupport: "$2,500 - $5,000",
-    projectIncludes: ["Sistemas personalizados (reservas, paneles, bases de datos)", "Integración backend y frontend"],
-    supportIncludes: ["Mantenimiento de base de datos", "Soporte de funcionalidades", "Optimización", "Resolución de errores"]
-  },
+  type: "Web con Backend Funcional",
+  projectPrice: "$12,000 - $30,000",
+  monthlySupport: "$2,500 - $5,000",
+  projectIncludes: ["Sistemas personalizados (reservas, paneles, bases de datos)", "Integración backend y frontend"],
+  supportIncludes: ["Mantenimiento de base de datos", "Soporte de funcionalidades", "Optimización", "Resolución de errores"]
+},
   {
     type: "Blogs o Portales de Contenido",
     projectPrice: "$5,000 - $10,000",
@@ -60,30 +60,26 @@ const PricingSection = () => {
   const cardsRef = useRef([]);
 
   useEffect(() => {
-    // Definimos la línea de tiempo de GSAP
     const tl = gsap.timeline({ paused: true });
 
-    // Animación de entrada de todo el contenedor para un efecto más suave
     tl.fromTo(
       ref.current,
       { opacity: 0, y: 50 },
       { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
     );
       
-    // Animación del encabezado
     tl.fromTo(
       headerRef.current.children,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out' },
-      "<0.2" // Inicia 0.2 segundos después del inicio de la línea de tiempo
+      "<0.2"
     );
     
-    // Animación de las tarjetas con un efecto de "pop-up"
     tl.fromTo(
       cardsRef.current,
       { opacity: 0, y: 50, scale: 0.95 },
       { opacity: 1, y: 0, scale: 1, stagger: 0.15, duration: 0.8, ease: 'back.out(1.7)' },
-      "<0.1" // Inicia 0.1 segundos después de la animación del encabezado
+      "<0.1"
     );
 
     if (isIntersecting) {
@@ -94,7 +90,7 @@ const PricingSection = () => {
 
   }, [isIntersecting, ref]);
 
-  const handleQuoteClick = (planType: string) => {
+  const handleQuoteClick = (planType) => {
     setSelectedPlan(planType);
     setModalOpen(true);
   };
@@ -125,7 +121,6 @@ const PricingSection = () => {
         id="pricing"
       >
         <div className="container px-6 mx-auto relative z-10">
-          {/* Encabezado */}
           <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#013467]/10 rounded-full text-[#013467] font-medium mb-6">
               <DollarSign className="w-4 h-4" />
@@ -139,7 +134,6 @@ const PricingSection = () => {
             </p>
           </div>
 
-          {/* Tarjetas de precios */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
             {pricingData.map((plan, index) => (
               <div
@@ -156,7 +150,6 @@ const PricingSection = () => {
                       Solución completa para tu negocio.
                     </p>
                     
-                    {/* Precios */}
                     <div className="text-center mb-6">
                       <p className="text-lg text-gray-700 font-semibold">Precio del Proyecto</p>
                       <p className="text-3xl font-extrabold text-[#013467]">{plan.projectPrice}</p>
@@ -165,7 +158,6 @@ const PricingSection = () => {
                     </div>
                   </div>
                   
-                  {/* Beneficios */}
                   <div className="space-y-4 flex-grow">
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
@@ -192,7 +184,6 @@ const PricingSection = () => {
                   </div>
                 </div>
 
-                {/* Botón de acción */}
                 <button
                   onClick={() => handleQuoteClick(plan.type)}
                   className="mt-8 block w-full text-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-[#013467] group-hover:bg-yellow-400 group-hover:text-gray-900 transition-colors duration-300"
@@ -211,14 +202,13 @@ const PricingSection = () => {
         </div>
       </section>
 
-      {/* Modal (sin cambios) */}
       {modalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
             <button className="modal-close" onClick={handleCloseModal}>&times;</button>
-            <h3 className="text-xl font-bold mb-4">¡Listo para iniciar tu proyecto!</h3>
+            <h3 className="text-xl font-bold mb-4 text-gray-900">¡Listo para iniciar tu proyecto!</h3>
             <p className="text-gray-600 mb-6">
-              ¿Cómo te gustaría enviarnos la solicitud de cotización para tu proyecto de **{selectedPlan}**?
+              ¿Cómo te gustaría enviarnos la solicitud de cotización para tu proyecto de **<span className="font-semibold text-[#013467]">{selectedPlan}</span>**?
             </p>
             <div className="flex flex-col gap-4">
               <button
@@ -232,13 +222,55 @@ const PricingSection = () => {
                 onClick={handleInstagramClick}
                 className="flex items-center justify-center gap-2 w-full px-6 py-3 border border-[#013467] text-base font-medium rounded-full text-[#013467] hover:bg-yellow-400 hover:text-gray-900 transition-colors"
               >
-                <Instagram className="w-5 h-h5" />
+                <Instagram className="w-5 h-5" />
                 Enviar mensaje por Instagram
               </button>
             </div>
           </div>
         </div>
       )}
+      
+      <style jsx>{`
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.6);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+        
+        .modal-content {
+          background-color: #fff;
+          padding: 2.5rem;
+          border-radius: 1.5rem;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+          max-width: 90%;
+          width: 400px;
+          position: relative;
+          transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        
+        .modal-close {
+          position: absolute;
+          top: 1rem;
+          right: 1.5rem;
+          background: none;
+          border: none;
+          font-size: 2rem;
+          color: #a0aec0;
+          cursor: pointer;
+          transition: color 0.2s ease-in-out;
+        }
+        
+        .modal-close:hover {
+          color: #2d3748;
+        }
+      `}</style>
     </>
   );
 };
