@@ -4,23 +4,23 @@ import { useState, useEffect, useRef } from 'react';
 import { useIntersectionObserver } from '@/components/ui/intersection-observer';
 
 const technologies = [
-  { name: 'React', img: '/logos/react.png', category: '', desc: 'Creación de interfaces interactivas' },
-  { name: 'Angular', img: '/logos/angular.png', category: '', desc: 'Desarrollo de aplicaciones web' },
-  { name: 'UI Libraries', img: '/logos/ui.png', category: '', desc: 'Diseño y componentes visuales' },
+  { name: 'React', img: '/logos/react.png' },
+  { name: 'Angular', img: '/logos/angular.png' },
+  { name: 'UI Libraries', img: '/logos/ui.png' },
 
-  { name: 'PHP', img: '/logos/php.png', category: '', desc: 'Gestión de procesos en el servidor' },
-  { name: 'Supabase', img: '/logos/supabase.png', category: '', desc: 'Servicios para datos y autenticación' },
+  { name: 'PHP', img: '/logos/php.png' },
+  { name: 'Supabase', img: '/logos/supabase.png' },
 
-  { name: 'SQL', img: '/logos/sql.png', category: '', desc: 'Almacenamiento de información' },
-  { name: 'PHPMyAdmin', img: '/logos/phpmyadmin.png', category: '', desc: 'Administración de bases de datos' },
+  { name: 'SQL', img: '/logos/sql.png' },
+  { name: 'PHPMyAdmin', img: '/logos/phpmyadmin.png' },
 
-  { name: 'Git', img: '/logos/git.png', category: '', desc: 'Control y seguimiento de proyectos' },
-  { name: 'GitHub', img: '/logos/github.png', category: '', desc: 'Plataforma para colaborar y compartir' },
-  { name: 'Vite', img: '/logos/vite.png', category: '', desc: 'Herramienta para iniciar proyectos' },
-  { name: 'Postman', img: '/logos/postman.png', category: '', desc: 'Pruebas y validación de servicios' },
+  { name: 'Git', img: '/logos/git.png' },
+  { name: 'GitHub', img: '/logos/github.png' },
+  { name: 'Vite', img: '/logos/vite.png' },
+  { name: 'Postman', img: '/logos/postman.png' },
 
-  { name: 'Vercel', img: '/logos/vercel.png', category: '', desc: 'Publicación de aplicaciones web' },
-  { name: 'Netlify', img: '/logos/netlify.png', category: '', desc: 'Implementación y alojamiento de sitios' }
+  { name: 'Vercel', img: '/logos/vercel.png' },
+  { name: 'Netlify', img: '/logos/netlify.png' }
 ];
 
 const TechSection = () => {

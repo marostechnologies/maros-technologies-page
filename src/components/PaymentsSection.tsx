@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useIntersectionObserver } from '@/components/ui/intersection-observer';
 import { CheckCircle2, DollarSign, Instagram, Mail } from 'lucide-react';
+import { gsap } from 'gsap';
 import React from 'react';
 
 const pricingData = [
@@ -55,6 +56,44 @@ const PricingSection = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
 
+  const headerRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    // Definimos la línea de tiempo de GSAP
+    const tl = gsap.timeline({ paused: true });
+
+    // Animación de entrada de todo el contenedor para un efecto más suave
+    tl.fromTo(
+      ref.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+    );
+      
+    // Animación del encabezado
+    tl.fromTo(
+      headerRef.current.children,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out' },
+      "<0.2" // Inicia 0.2 segundos después del inicio de la línea de tiempo
+    );
+    
+    // Animación de las tarjetas con un efecto de "pop-up"
+    tl.fromTo(
+      cardsRef.current,
+      { opacity: 0, y: 50, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, stagger: 0.15, duration: 0.8, ease: 'back.out(1.7)' },
+      "<0.1" // Inicia 0.1 segundos después de la animación del encabezado
+    );
+
+    if (isIntersecting) {
+      tl.play();
+    } else {
+      tl.reverse();
+    }
+
+  }, [isIntersecting, ref]);
+
   const handleQuoteClick = (planType: string) => {
     setSelectedPlan(planType);
     setModalOpen(true);
@@ -80,103 +119,22 @@ const PricingSection = () => {
 
   return (
     <>
-      <style jsx>{`
-        /* Animación de entrada para toda la sección */
-        .section-container {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .section-container.is-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        /* Animación para los elementos del encabezado */
-        .header-item {
-          opacity: 0;
-          transform: translateY(10px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .section-container.is-visible .header-item {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        
-        /* Retrasos secuenciales para los elementos del encabezado */
-        .section-container.is-visible .header-item:nth-child(1) { transition-delay: 0s; }
-        .section-container.is-visible .header-item:nth-child(2) { transition-delay: 0.1s; }
-        .section-container.is-visible .header-item:nth-child(3) { transition-delay: 0.2s; }
-        
-        /* Animación para las tarjetas de precios */
-        .grid-item {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .section-container.is-visible .grid-item {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        
-        /* Retrasos secuenciales para las tarjetas */
-        .section-container.is-visible .grid-item:nth-child(1) { transition-delay: 0.3s; }
-        .section-container.is-visible .grid-item:nth-child(2) { transition-delay: 0.4s; }
-        .section-container.is-visible .grid-item:nth-child(3) { transition-delay: 0.5s; }
-        .section-container.is-visible .grid-item:nth-child(4) { transition-delay: 0.6s; }
-        .section-container.is-visible .grid-item:nth-child(5) { transition-delay: 0.7s; }
-        .section-container.is-visible .grid-item:nth-child(6) { transition-delay: 0.8s; }
-        
-        /* Estilos del modal */
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 999;
-        }
-        .modal-content {
-          background: white;
-          padding: 2.5rem;
-          border-radius: 1rem;
-          text-align: center;
-          max-width: 400px;
-          width: 90%;
-          position: relative;
-        }
-        .modal-close {
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-          cursor: pointer;
-          font-size: 1.5rem;
-          color: #888;
-        }
-      `}</style>
       <section 
         ref={ref}
-        className={`relative py-16 bg-white md:py-24 section-container ${isIntersecting ? 'is-visible' : ''}`}
+        className={`relative py-16 bg-white md:py-24`}
         id="pricing"
       >
         <div className="container px-6 mx-auto relative z-10">
           {/* Encabezado */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="header-item inline-flex items-center gap-2 px-4 py-2 bg-[#013467]/10 rounded-full text-[#013467] font-medium mb-6">
+          <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#013467]/10 rounded-full text-[#013467] font-medium mb-6">
               <DollarSign className="w-4 h-4" />
               Precios y Planes
             </div>
-            <h2 className="header-item text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Encuentra el plan <span className="text-[#013467]">perfecto</span> para ti
             </h2>
-            <p className="header-item text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
               Consulta nuestros precios transparentes para el desarrollo y soporte de tus proyectos.
             </p>
           </div>
@@ -186,7 +144,8 @@ const PricingSection = () => {
             {pricingData.map((plan, index) => (
               <div
                 key={index}
-                className="grid-item group bg-gray-50 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
+                ref={el => cardsRef.current[index] = el}
+                className="group bg-gray-50 rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
               >
                 <div className="flex flex-col flex-grow">
                   <div>
@@ -252,7 +211,7 @@ const PricingSection = () => {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* Modal (sin cambios) */}
       {modalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -273,7 +232,7 @@ const PricingSection = () => {
                 onClick={handleInstagramClick}
                 className="flex items-center justify-center gap-2 w-full px-6 py-3 border border-[#013467] text-base font-medium rounded-full text-[#013467] hover:bg-yellow-400 hover:text-gray-900 transition-colors"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-5 h-h5" />
                 Enviar mensaje por Instagram
               </button>
             </div>
