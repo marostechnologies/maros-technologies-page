@@ -4,15 +4,23 @@ import { useState, useEffect, useRef } from 'react';
 import { useIntersectionObserver } from '@/components/ui/intersection-observer';
 
 const technologies = [
-  { name: 'React', img: '/logos/react.png', category: 'Frontend' },
-  { name: 'Vite', img: '/logos/vite.png', category: 'Development' },
-  { name: 'Git', img: '/logos/git.png', category: 'Development' },
-  { name: 'GitHub', img: '/logos/github.png', category: 'Development' },
-  { name: 'Vercel/Netlify', img: '/logos/netfly.png', category: 'Deployment' },
-  { name: 'Postman', img: '/logos/postman.png', category: 'Testing' },
-  { name: 'SQL', img: '/logos/sql.png', category: 'Data' },
-  { name: 'Supabase', img: '/logos/supabase.png', category: 'Backend' },
-  { name: 'UI Libraries', img: '/logos/ui.png', category: 'Frontend' }
+  { name: 'React', img: '/logos/react.png', category: '', desc: 'Creación de interfaces interactivas' },
+  { name: 'Angular', img: '/logos/angular.png', category: '', desc: 'Desarrollo de aplicaciones web' },
+  { name: 'UI Libraries', img: '/logos/ui.png', category: '', desc: 'Diseño y componentes visuales' },
+
+  { name: 'PHP', img: '/logos/php.png', category: '', desc: 'Gestión de procesos en el servidor' },
+  { name: 'Supabase', img: '/logos/supabase.png', category: '', desc: 'Servicios para datos y autenticación' },
+
+  { name: 'SQL', img: '/logos/sql.png', category: '', desc: 'Almacenamiento de información' },
+  { name: 'PHPMyAdmin', img: '/logos/phpmyadmin.png', category: '', desc: 'Administración de bases de datos' },
+
+  { name: 'Git', img: '/logos/git.png', category: '', desc: 'Control y seguimiento de proyectos' },
+  { name: 'GitHub', img: '/logos/github.png', category: '', desc: 'Plataforma para colaborar y compartir' },
+  { name: 'Vite', img: '/logos/vite.png', category: '', desc: 'Herramienta para iniciar proyectos' },
+  { name: 'Postman', img: '/logos/postman.png', category: '', desc: 'Pruebas y validación de servicios' },
+
+  { name: 'Vercel', img: '/logos/vercel.png', category: '', desc: 'Publicación de aplicaciones web' },
+  { name: 'Netlify', img: '/logos/netlify.png', category: '', desc: 'Implementación y alojamiento de sitios' }
 ];
 
 const TechSection = () => {
@@ -24,7 +32,7 @@ const TechSection = () => {
     if (!carousel) return;
 
     let scrollAmount = 0;
-    const scrollSpeed = 0.5; // Ajusta la velocidad de desplazamiento
+    const scrollSpeed = 1; // Ajusta la velocidad de desplazamiento
     const checkPoint = carousel.scrollWidth / 2 - carousel.offsetWidth / 2;
 
     const scroll = () => {
@@ -75,7 +83,7 @@ const TechSection = () => {
       `}</style>
       <section 
         ref={ref}
-        className={`py-12 bg-white md:py-16 overflow-hidden section-transition-container ${isIntersecting ? 'is-visible' : ''}`}
+        className={`py-6 bg-white md:py-8 overflow-hidden section-transition-container ${isIntersecting ? 'is-visible' : ''}`}
       >
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           {/* Header */}

@@ -56,7 +56,7 @@ const Footer = () => {
           >
             <div className="flex items-center gap-2">
               <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
-              <span className="font-semibold text-gray-900 text-lg">MAROS Technology</span>
+              <span className="font-semibold text-gray-900 text-lg"></span>
             </div>
             <p className="text-sm text-gray-500">
               Empresa mexicana fundada en 2025, especializada en soluciones digitales.
